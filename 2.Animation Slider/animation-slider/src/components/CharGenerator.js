@@ -9,10 +9,25 @@ class CharacterGenerator extends Component {
     };
   }
 
+  componentDidMount() {
+    fetch("http://localhost:9999/roster")
+      .then((data) => {
+        return data.json();
+      })
+      .then((parsedData) => {
+        console.log(parsedData);
+        this.setState({ charArray: parsedData });
+      });
+  }
+
   render() {
-    return(
-    <div>Hello</div>
-    )
+    return (
+      <div className="image-container">
+        {this.state.charArray.map((x, index) => {
+          return <Characters key={index} params={x} />;
+        })}
+      </div>
+    );
   }
 }
 
