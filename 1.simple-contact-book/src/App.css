@@ -1,0 +1,33 @@
+.container{
+  text-align:center;
+}
+.content{
+  width:50%;
+  margin:auto
+}
+.contact{
+  width:100%;
+  color:white;
+  background-color:#333;
+  text-align:center;
+  font-weight: bold;
+  border:5px solid white;
+  padding:10px
+}
+.info{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content: center;
+  width:100%;
+  margin:auto;
+  color:white;
+  background-color:#333;
+  font-weight: bold;
+  border:5px solid white;
+  padding:10px
+}
+.col{
+  width:50%;
+
+}
