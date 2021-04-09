@@ -1,4 +1,5 @@
 import React, { Component} from 'react';
+import './Form.css';
 
 export default class Form extends Component {
     constructor(props) {
@@ -22,19 +23,20 @@ export default class Form extends Component {
 
     render(){
         return (
-            <form onSubmit={this.onSubmit}> 
+            <form className="default-form" onSubmit={this.onSubmit}> 
+            <h1>Event form</h1>
                 Name: 
                 <input 
                 onChange={this.onChange}
                 name="name"
                 type="text" 
-                value={this.state.name} /> <br/>
+                value={this.state.name} />
                 Password: 
                 <input 
                 onChange={this.onChange}
                 type="password" 
                 name="password"
-                value={this.state.password} /> <br/>
+                value={this.state.password} />
                 Bio: 
                 <textarea 
                 onChange={this.onChange}

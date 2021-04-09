@@ -40,6 +40,7 @@ export default class FocusDiv extends Component {
         return(
             <div className={currentClass} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}> 
                 <p> This is div number {this.props.number} </p>
+                {this.props.children}
             </div>
         );
     }
