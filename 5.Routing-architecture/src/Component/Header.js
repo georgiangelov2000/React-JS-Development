@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
+import './Header.css';
 
 export default class Header extends Component {
     render(){
@@ -7,8 +8,8 @@ export default class Header extends Component {
             <header>
                 <h1>Site Logo</h1>
                <nav> 
-                    <Link to="/home">Home</Link>
-                    <Link to="/about">About</Link>
+                    <NavLink activeClassName="activeLink" to="/home">Home</NavLink>
+                    <NavLink activeClassName="activeLink" to="/about">About</NavLink>
                </nav>
             </header>
         )

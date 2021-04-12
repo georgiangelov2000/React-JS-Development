@@ -1,37 +1,58 @@
-import React, { Component } from 'react';
-import './App.css';
-import { Route } from 'react-router-dom';
-import Header from './Component/Header';
+import React, { Component } from "react";
+import "./App.css";
+import { Route, Switch, Redirect } from "react-router-dom";
+import Header from "./Component/Header";
 
-const Home = ({match}) => (
+const Home = ({ match }) => (
   <div>
     <h1>Home Page</h1>
-    <Route path={match.url + '/contact'} component={Contact} />
+  </div>
+);
+
+const Dashboard = (props) => (
+  <div>
+    <h1>Your Dashboard</h1>
   </div>
 )
 
-const About = props => (
+const About = (props) => (
   <div>
     <h1>About Page</h1>
   </div>
-)
+);
 
-const Contact= props => (
+const User = (props) => (
   <div>
-    <h1>Contact nested Page</h1>
+    <h1>User Details</h1>
+    <p>Display details for {props.match.params.userName}</p>
   </div>
-)
+);
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { loggedIn: false };
+  }
   render() {
     return (
       <div className="App">
-        <Header/>
-        <Route path="/home" component={Home} />
-        <Route path="/about" component={About}/>
+        <Header />
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => {
+              if (this.state.loggedIn) return (<Redirect to="/dashboard" />);
+              else return <Home />;
+            }}
+          />
+          <Route path="/dashboard" component={Dashboard}></Route>
+          <Route path="/about" component={About} />
+          <Route path="/details/:userName" component={User} />
+        </Switch>
       </div>
     );
-  };
-};
+  }
+}
 
 export default App;
