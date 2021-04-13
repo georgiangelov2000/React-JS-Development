@@ -12,5 +12,5 @@ export default function calculator(oldState=5, action) {
             return oldState * action.value
         default:
             return oldState;
-    };
+    }
 };
