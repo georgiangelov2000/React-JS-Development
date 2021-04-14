@@ -1,25 +1,49 @@
 import React, { Component } from "react";
+import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import axios from "axios";
 
-export default class AddStudent extends Component {
+export default class EditStudent extends Component {
   constructor(props) {
     super(props);
-
-    this.state = { firstName: "", lastName: "", facultyNumber: "", course: "" };
-
-    this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+      firstName: "",
+      lastName: "",
+      facultyNumber: "",
+      course: "",
+    };
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentWillUnmount() {
+    this._isMounted = true;
+    axios
+      .get("http://localhost:8000/update/student/" + this.props.match.params.id)
+      .then((res) => {
+          this.setState({
+            firstName: res.data,
+            lastName: res.data,
+            facultyNumber: res.data,
+            course: res.data,
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    this.props.history.push("/students");
+  }
+
+  onChange(e) {
+    e.target.name;
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
   }
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state.firstName);
-    console.log(this.state.lastName);
-    console.log(this.state.facultyNumber);
-    console.log(this.state.course);
 
     const studentObject = {
       firstName: this.state.firstName,
@@ -29,31 +53,28 @@ export default class AddStudent extends Component {
     };
 
     axios
-      .post("http://localhost:8000/new/student", studentObject)
-      .then((res) => console.log(res.data));
+      .put(
+        "http://localhost:8000/update/student/" + this.props.match.params.id,
+        studentObject
+      )
+      .then((res) => {
+        console.log(res.data);
+        console.log("Student successfully updated");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
-      this.setState({
-      firstName: "",
-      lastName: "",
-      facultyNumber: "",
-      course: "",
-    });
-
-    this.props.history.push('/students')
-  }
-
-  onChange(e) {
-    e.target.name;
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-
+    // Redirect to Student List
+    this.props.history.push("/students");
   }
 
   render() {
+    console.log(this.props.match.params.id)
     return (
       <Container>
-        <h1>Add Student Form</h1>
+        <h1>Edit Form Student</h1>
+          <h4>Current Student Id : {this.props.match.params.id}</h4>
         <Form onSubmit={this.onSubmit}>
           <Form.Group controlId="firstName">
             <Form.Control

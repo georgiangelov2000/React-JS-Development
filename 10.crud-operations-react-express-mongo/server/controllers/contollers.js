@@ -6,7 +6,7 @@ exports.getStudents = async (req, res) => {
       res.json(jobs);
     })
     .catch((error) => {
-      res.status(500).send(error.message);
+      res.status(500).send(error);
     });
 };
 
@@ -22,18 +22,18 @@ exports.newStudent = async (req, res) => {
       res.json(student);
     })
     .catch((error) => {
-      res.status(500).send(error.message);
+      res.status(500).send(error);
     });
 };
 
 exports.deleteStudent= async (req,res)=>{
     const student={_id:req.params.id};
-    Students.findByIdAndDelete(student)
+    Students.findByIdAndRemove(student)
     .then((student)=>{
       res.json(student);
     })
     .catch((error)=>{
-       res.status(500).send(error.message)
+       res.status(500).send(error)
     })
 };
 
@@ -44,11 +44,11 @@ exports.getUpdateStudent = async (req, res) => {
       res.json(student);
     })
     .catch((error) => {
-      res.status(500).send(error.message);
+      res.status(500).send(error);
     });
 };
 
-exports.postUpdateStudent = async (req, res, next) => {
+exports.postUpdateStudent = async (req, res) => {
   const student = { _id: req.params.id };
 
   await Students.findByIdAndUpdate(student ,{

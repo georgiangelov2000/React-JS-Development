@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import TableStudents from "./TableStudents";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import Container from "react-bootstrap/Container";
+import Table from "react-bootstrap/Table";
 
 export default class GetStudents extends Component {
   constructor(props) {
@@ -33,21 +34,20 @@ export default class GetStudents extends Component {
 
   render() {
     return (
-      <div>
-        <table className="table table-hover">
+      <Container>
+        <Table striped bordered hover size="sm">
           <thead>
             <tr>
-              <th scope="col">First name</th>
-              <th scope="col">Last name</th>
-              <th scope="col">Faculty Number</th>
-              <th scope="col">Faculty Course</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Faculty Number</th>
+              <th>Course</th>
+              <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
-              {this.DataTable()}
-          </tbody>
-        </table>
-      </div>
+          <tbody>{this.DataTable()}</tbody>
+        </Table>
+      </Container>
     );
   }
 }
