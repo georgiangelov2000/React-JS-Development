@@ -8,10 +8,35 @@ export default class AddStudent extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { firstName: "", lastName: "", facultyNumber: "", course: "" };
-
+    this.onChangeStudentFirstName = this.onChangeStudentFirstName.bind(this);
+    this.onChangeStudentLastName = this.onChangeStudentLastName.bind(this);
+    this.onChangeStudentfacultyNumber = this.onChangeStudentfacultyNumber.bind(this);
+    this.onChangeCourse = this.onChangeCourse.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
+
+    this.state = { 
+      firstName: "", 
+      lastName: "", 
+      facultyNumber: "", 
+      course: "" 
+    };
+
+  }
+
+  onChangeStudentFirstName(e) {
+    this.setState({ firstName: e.target.value });
+  }
+
+  onChangeStudentLastName(e) {
+    this.setState({ lastName: e.target.value });
+  }
+
+  onChangeStudentfacultyNumber(e) {
+    this.setState({ facultyNumber: e.target.value });
+  }
+
+  onChangeCourse(e) {
+    this.setState({ course: e.target.value });
   }
 
   onSubmit(e) {
@@ -32,22 +57,14 @@ export default class AddStudent extends Component {
       .post("http://localhost:8000/new/student", studentObject)
       .then((res) => console.log(res.data));
 
-      this.setState({
+    this.setState({
       firstName: "",
       lastName: "",
       facultyNumber: "",
       course: "",
     });
 
-    this.props.history.push('/students')
-  }
-
-  onChange(e) {
-    e.target.name;
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-
+    this.props.history.push("/students");
   }
 
   render() {
@@ -58,40 +75,32 @@ export default class AddStudent extends Component {
           <Form.Group controlId="firstName">
             <Form.Control
               type="text"
-              className="form-control"
               placeholder="Enter First name"
-              name="firstName"
-              onChange={this.onChange}
+              onChange={this.onChangeStudentFirstName}
               value={this.state.firstName}
             />
           </Form.Group>
           <Form.Group controlId="lastName">
             <Form.Control
               type="text"
-              className="form-control"
               placeholder="Enter Last name"
-              name="lastName"
-              onChange={this.onChange}
+              onChange={this.onChangeStudentLastName}
               value={this.state.lastName}
             />
           </Form.Group>
           <Form.Group controlId="facultyNumber">
             <Form.Control
               type="number"
-              className="form-control"
               placeholder="Enter Faculty Number"
-              name="facultyNumber"
-              onChange={this.onChange}
+              onChange={this.onChangeStudentfacultyNumber}
               value={this.state.facultyNumber}
             />
           </Form.Group>
           <Form.Group controlId="course">
             <Form.Control
               type="number"
-              className="form-control"
               placeholder="Enter Course"
-              name="course"
-              onChange={this.onChange}
+              onChange={this.onChangeCourse}
               value={this.state.course}
             />
           </Form.Group>

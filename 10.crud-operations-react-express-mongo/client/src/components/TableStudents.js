@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 
@@ -29,13 +29,13 @@ export default class TableStudents extends Component {
         <td>{this.props.obj.course}</td>
         <td>
           <Link
-            className="edit-link mr-2"
+            className="edit-link"
             to={"/update/student/"+ this.props.obj._id}
           >
             Edit
           </Link>
-          <Button onClick={this.deleteStudent} variant="outline-danger">
-            Danger
+          <Button onClick={this.deleteStudent} size="sm" variant="danger">
+            Delete
           </Button>
         </td>
       </tr>

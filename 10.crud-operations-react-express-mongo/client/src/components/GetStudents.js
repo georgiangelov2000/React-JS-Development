@@ -45,7 +45,9 @@ export default class GetStudents extends Component {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>{this.DataTable()}</tbody>
+          <tbody>
+            {this.DataTable()}
+          </tbody>
         </Table>
       </Container>
     );
