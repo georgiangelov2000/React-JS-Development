@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
 import Users from "./Components/Users";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
 
 class App extends Component {
   constructor(props) {
@@ -42,26 +47,14 @@ class App extends Component {
     return (
       <div className="App">
         <h1>RESTFull API and Events  </h1>
-        <div className="row">
-          <div className="col">
-            <button
-              type="button"
-              onClick={this.onClick}
-              className="btn btn-primary btn-lg w-50"
-            >
-              Show
-            </button>
-          </div>
-          <div className="col">
-            <button
-              onClick={this.onClickHide}
-              type="button"
-              className="btn btn-secondary btn-lg w-50"
-            >
-              Hide
-            </button>
-          </div>
-        </div>
+        <Row>
+          <Col>
+          <Button variant="primary" onClick={this.onClick} >Show</Button>
+          </Col>
+          <Col>
+          <Button variant="secondary" onClick={this.onClickHide}>Hide</Button>
+          </Col>
+        </Row>
 
         <div className={currentClass}>
           <Users users={this.state.users} />
