@@ -6,18 +6,20 @@ import axios from "axios";
 export default class TableStudents extends Component {
   constructor(props) {
     super(props);
-    this.deleteStudent = this.deleteStudent.bind(this);
+    this.deleteStudent = this.deleteStudent.bind(this);    
   }
 
   deleteStudent() {
     axios
       .delete("http://localhost:8000/delete/student/" + this.props.obj._id)
       .then((res) => {
-        console.log("Student successfully deleted!");
+        console.log('Succesfully deleted user')
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error)=>{
+        console.log(error)
+      })
+
+      
   }
 
   render() {

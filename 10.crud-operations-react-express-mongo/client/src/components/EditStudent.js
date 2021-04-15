@@ -25,7 +25,7 @@ export default class EditStudent extends Component {
   }
   
   componentDidMount() {
-    axios.get('http://localhost:4000/update/student/' + this.props.match.params.id)
+    axios.get('http://localhost:8000/update/student/' + this.props.match.params.id)
       .then(res => {
         this.setState({
           firstName: res.data.firstName,
@@ -78,7 +78,6 @@ export default class EditStudent extends Component {
   }
 
   render() {
-    console.log(this.props.match.params.id)
     return (
       <Container>
         <h1>Edit Form Student</h1>
