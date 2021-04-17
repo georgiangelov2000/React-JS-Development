@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Expenses from "./components/Expenses";
+import NewExpense from "./components/NewExpense";
 
 class App extends Component {
   constructor(props) {
@@ -34,10 +35,16 @@ class App extends Component {
     };
   }
 
+  addExpenseHandler = expense => {
+    console.log('In App.js');
+    console.log(expense);
+  };
+
   render() {
     return (
       <div>
         <h2>Let's get started!</h2>
+        <NewExpense onAddExpense={this.addExpenseHandler} />
         <Expenses items={this.state.expenses} />
       </div>
     );
