@@ -1,0 +1,14 @@
+.myCard{
+  width:50%;
+  margin:auto;
+  text-align: center;
+}
+
+.ul-wrapper{
+  padding:0px
+}
+
+.li-item{
+  list-style:none;
+  padding:10px 0px 10px 0px;
+}
