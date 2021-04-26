@@ -1,0 +1,24 @@
+.App{
+  text-align:center;
+}
+.mySlider{
+  margin: auto;
+  width:80%
+}
+.slider{
+  max-height: 200px;
+}
+.left{
+  width:100px
+}
+.right{
+  width:100px
+}
+.char-img{
+  width:150px;
+  height:200px
+}
+.image-container{
+  display:flex;
+  justify-content:center
+}
