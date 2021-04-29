@@ -1,10 +1,16 @@
 import React from "react";
+import Contacts from "./contacts/Contacts";
+import ContactForm from "./contacts/ContactForm"
 
 const Home = () => {
   return (
     <div>
-        <h1>Home</h1>
-        <p> This is a full stack React for contacts of the users</p>
+        <div>
+          <ContactForm />
+        </div>
+        <div>
+          <Contacts />
+        </div>
     </div>
   )
 };
