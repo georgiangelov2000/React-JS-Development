@@ -4,7 +4,6 @@ import ContactContext from "../../context/contacts/contactContext";
 const ContactForm = () => {
 const contactContext=useContext(ContactContext);
 
-
 const {addContact,current,updateCurrentContact,clearCurrentContact}=contactContext;
 
 useEffect(() =>{
