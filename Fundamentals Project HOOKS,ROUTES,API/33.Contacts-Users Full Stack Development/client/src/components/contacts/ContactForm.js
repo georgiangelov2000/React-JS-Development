@@ -1,8 +1,24 @@
-import React, { useState,useContext} from "react";
+import React, { useState,useContext,useEffect} from "react";
 import ContactContext from "../../context/contacts/contactContext";
 
 const ContactForm = () => {
 const contactContext=useContext(ContactContext);
+
+
+const {addContact,current,updateCurrentContact,clearCurrentContact}=contactContext;
+
+useEffect(() =>{
+  if(current!== null){
+    setContact(current);
+  }else {
+    setContact({
+      name: "",
+      email: "",
+      phone: "",
+      type: "personal",
+    })
+  }
+},[contactContext,current]);
 
   const [contact, setContact] = useState({
     name: "",
@@ -17,19 +33,24 @@ const contactContext=useContext(ContactContext);
 
   const onSubmit= e =>{
       e.preventDefault();
-      contactContext.addContact(contact);
-      setContact({
-        name: "",
-        email: "",
-        phone: "",
-        type: "personal",
-      })
+
+    if(current==null){
+      addContact(contact);
+    }else {
+      updateCurrentContact(contact);
+    }
+
+    clearAll();
+  }
+
+  const clearAll=()=>{
+    clearCurrentContact();
   }
 
   return (
     <div>
       <form onSubmit={onSubmit}>
-        <h2>Add Contact</h2>
+        <h2>{current ? 'Edit Contact':'Add Contact'}</h2>
         <input type="text" placeholder="name" name="name" value={name} onChange={onChange} />
         <input type="email" placeholder="email" name="email" value={email} onChange={onChange} />
         <input type="text" placeholder="phone" name="phone" value={phone} onChange={onChange} />
@@ -50,7 +71,10 @@ const contactContext=useContext(ContactContext);
           onChange={onChange}
         />
         Professional{" "}
-        <input type="submit" value="add Contact" />
+        <input type="submit" value={current ? 'Update Contact':'Add Contact'} />
+        {current && <div>
+          <button onClick={clearAll}>Clear</button>
+          </div>}
       </form>
     </div>
   );
