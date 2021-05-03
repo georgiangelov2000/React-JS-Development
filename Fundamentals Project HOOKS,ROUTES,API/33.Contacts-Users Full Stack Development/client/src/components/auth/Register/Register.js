@@ -1,10 +1,26 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import AlertsContext from "../../../context/alert/alertContext";
+import AuthContext from "../../../context/auth/authContext";
 
-const Register = () => {
+const Register = props => {
   const alertContext = useContext(AlertsContext);
+  const authContext = useContext(AuthContext);
 
   const { setAlert } = alertContext;
+
+  const { register,error,clearError,isAuthenticated } = authContext;
+
+
+  useEffect(()=>{
+    if(isAuthenticated){
+      props.history.push('/');
+    }
+
+    if(error==='User already exists'){
+      setAlert(error,'danger');
+      clearError();
+    }
+  },[error, isAuthenticated,props.history]);
 
   const [user, setUser] = useState({
     name: "",
@@ -14,16 +30,20 @@ const Register = () => {
   });
   const { name, email, password, password2 } = user;
 
-  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     if (name === "" || email === "" || password === "") {
-      setAlert("Please eter all fields","danger");
+      setAlert("Please eter all fields", "danger");
     } else if (password !== password2) {
-      setAlert("Password do not match","danger");
+      setAlert("Password do not match", "danger");
     } else {
-      console.log("Register submit");
+      register({
+        name,
+        email,
+        password
+      })
     }
   };
 
@@ -36,11 +56,23 @@ const Register = () => {
       <form onSubmit={onSubmit}>
         <div>
           <label htmlFor="name">Name</label>
-          <input type="text" name="name" value={name} onChange={onChange} required />
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={onChange}
+            required
+          />
         </div>
         <div>
           <label htmlFor="Email">Email</label>
-          <input type="email" name="email" value={email} onChange={onChange} required />
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={onChange}
+            required
+          />
         </div>
         <div>
           <label htmlFor="password">Password</label>
