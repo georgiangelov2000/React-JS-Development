@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { v4 as uuid } from "uuid";
+import axios from "axios";
 import ContactContext from "./contactContext";
 import ContactReducer from "./ContactReducer";
 import {
@@ -10,55 +10,49 @@ import {
   UPDATE_CONTACT,
   FILTER_CONTACTS,
   CLEAR_FILTER,
+  CONTACT_ERROR
 } from "../types";
 
 const ContactState = (props) => {
   const initialState = {
-    contacts: [
-      {
-        id: 1,
-        name: "George Angelov",
-        email: "angelov2000@abv.bg",
-        phone: "089631823",
-        type: "personal",
-      },
-      {
-        id: 2,
-        name: "Ivan Petrov",
-        email: "ivanPetor2000@abv.bg",
-        phone: "089631824",
-        type: "personal",
-      },
-      {
-        id: 3,
-        name: "Steven Ivanov",
-        email: "angelov2000@abv.bg",
-        phone: "089631823",
-        type: "personal",
-      },
-    ],
-    current:null,
-    filtered:null,
+    contacts: [],
+    current: null,
+    filtered: null,
+    error:null
   };
 
   const [state, dispatch] = useReducer(ContactReducer, initialState);
 
-  const addContact = (contact) => {
-    contact.id = uuid;
-    dispatch({
-      type: ADD_CONTACT,
-      payload: contact,
-    });
+  const addContact = async (contact) => {
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/api/contacts",
+        contact,
+        config
+      );
+      dispatch({
+        type: ADD_CONTACT,
+        payload: res.data,
+      });
+    } catch (error) {
+      dispatch({ type:CONTACT_ERROR, payload:error.response.msg });
+    }
   };
 
-  const deleteContact = id => {
+  const deleteContact = (id) => {
     dispatch({
       type: DELETE_CONTACT,
       payload: id,
     });
   };
 
-  const setCurrentContact = contact => {
+  const setCurrentContact = (contact) => {
     dispatch({
       type: SET_CURRENT,
       payload: contact,
@@ -71,17 +65,17 @@ const ContactState = (props) => {
     });
   };
 
-  const updateCurrentContact = contact => {
+  const updateCurrentContact = (contact) => {
     dispatch({
       type: UPDATE_CONTACT,
       payload: contact,
     });
   };
 
-  const filterContacts = text => {
+  const filterContacts = (text) => {
     dispatch({
       type: FILTER_CONTACTS,
-      payload: text
+      payload: text,
     });
   };
 
@@ -91,20 +85,20 @@ const ContactState = (props) => {
     });
   };
 
-
   return (
     <ContactContext.Provider
       value={{
         contacts: state.contacts,
-        current:state.current,
-        filtered:state.filtered,
+        current: state.current,
+        filtered: state.filtered,
+        error:state.error,
         addContact,
         deleteContact,
         setCurrentContact,
         clearCurrentContact,
         updateCurrentContact,
         filterContacts,
-        clearFilter
+        clearFilter,
       }}
     >
       {props.children}
