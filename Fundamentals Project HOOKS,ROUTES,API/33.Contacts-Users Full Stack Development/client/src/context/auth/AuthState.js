@@ -19,29 +19,28 @@ const AuthState = (props) => {
     token: localStorage.getItem("token"),
     isAuthenticated: null,
     loading: true,
+    user: null,
     error: null,
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   const loadUser = async () => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
+    setAuthToken(localStorage.token);
+
     try {
-      const res = await axios.get("/api/auth");
+      const res = await axios.get("http://localhost:8000/api/auth");
+
       dispatch({
         type: USER_LOADED,
         payload: res.data,
       });
-    } catch (error) {
-      dispatch({
-        type: AUTH_ERROR,
-      });
+    } catch (err) {
+      dispatch({ type: AUTH_ERROR });
     }
   };
 
-  const register = async (formData) => {
+  const register = async formData => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -49,25 +48,23 @@ const AuthState = (props) => {
     };
 
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/users",
-        formData,
-        config
-      );
+      const res = await axios.post("http://localhost:8000/api/users", formData, config);
+
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data,
       });
+
       loadUser();
-    } catch (error) {
+    } catch (err) {
       dispatch({
         type: REGISTER_FAIL,
-        payload: error.response.data.msg,
+        payload: err.response.data.msg,
       });
     }
   };
 
-  const login = async (formData) => {
+  const login = async formData => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -75,42 +72,39 @@ const AuthState = (props) => {
     };
 
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth",
-        formData,
-        config
-      );
+      const res = await axios.post("http://localhost:8000/api/auth", formData, config);
+
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data,
       });
-    } catch (error) {
+
+      loadUser();
+    } catch (err) {
       dispatch({
         type: LOGIN_FAIL,
-        payload: error.response.data.msg,
+        payload: err.response.data.msg,
       });
     }
   };
 
-  const logout=()=>dispatch({type: LOGOUT})
+  const logout = () => dispatch({ type: LOGOUT });
 
-  const clearError = () =>
-    dispatch({
-      type: CLEAR_ERRORS,
-    });
+  const clearError = () => dispatch({ type: CLEAR_ERRORS });
 
   return (
     <AuthContext.Provider
       value={{
         token: state.token,
         isAuthenticated: state.isAuthenticated,
-        token: state.loading,
+        loading: state.loading,
         user: state.user,
         error: state.error,
         register,
-        clearError,
         loadUser,
         login,
+        logout,
+        clearError,
       }}
     >
       {props.children}

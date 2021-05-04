@@ -10,6 +10,7 @@ const User = require("../models/User");
 router.post(
   "/",
   [
+    check("name", "Please add name").not().isEmpty(),
     check("email", "Please include a valid email").isEmail(),
     check(
       "password",
@@ -21,6 +22,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+
     const { name, email, password } = req.body;
 
     try {
@@ -66,4 +68,4 @@ router.post(
   }
 );
 
-module.exports=router;
+module.exports = router;

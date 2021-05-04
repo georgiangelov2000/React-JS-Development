@@ -34,7 +34,7 @@ const Navbar = ({ title }) => {
   );
 
   return (
-    <div>
+    <div className="navigation-navbar">
       <h1>{title}</h1>
       <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
     </div>
