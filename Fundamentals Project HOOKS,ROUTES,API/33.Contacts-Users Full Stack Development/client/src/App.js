@@ -1,11 +1,12 @@
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
+import Navbar from "./components/Navbar/Navbar";
+import Home from "./components/Home/Home";
 import About from "./components/About";
-import Register from "./components/auth/Register/Register";
-import Login from "./components/auth/Login/Login";
-import ContactState from "./context/contacts/contactState";
+import Register from "./components/Auth/Register/Register";
+import Login from "./components/Auth/Login/Login";
+import ContactState from "./context/contacts/ContactState";
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
 import Alerts from "./components/Alerts/Alerts";

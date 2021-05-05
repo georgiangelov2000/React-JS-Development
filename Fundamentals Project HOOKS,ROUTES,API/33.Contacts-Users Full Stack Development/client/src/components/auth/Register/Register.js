@@ -48,12 +48,12 @@ const Register = props => {
   };
 
   return (
-    <div>
-      <h1>
+    <div >
+      <h1 >
         Account:
         <span>Register</span>
       </h1>
-      <form onSubmit={onSubmit}>
+      <form  onSubmit={onSubmit}>
         <div>
           <label htmlFor="name">Name</label>
           <input
