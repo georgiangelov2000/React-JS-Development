@@ -1,6 +1,7 @@
 import React, { useState, useContext,useEffect } from "react";
 import AlertsContext from "../../../context/alert/alertContext";
 import AuthContext from "../../../context/auth/authContext";
+import style from "./Register.module.css";
 
 const Register = props => {
   const alertContext = useContext(AlertsContext);
@@ -48,34 +49,33 @@ const Register = props => {
   };
 
   return (
-    <div >
+    <div className={style.container} >
       <h1 >
         Account:
         <span>Register</span>
       </h1>
-      <form  onSubmit={onSubmit}>
-        <div>
-          <label htmlFor="name">Name</label>
+      <form  className={style.myForm} onSubmit={onSubmit}>
+        <div className={style.divForm}>
           <input
             type="text"
             name="name"
             value={name}
             onChange={onChange}
             required
+            placeholder="Name"
           />
         </div>
-        <div>
-          <label htmlFor="Email">Email</label>
+        <div className={style.divForm}>
           <input
             type="email"
             name="email"
             value={email}
             onChange={onChange}
             required
+            placeholder="email"
           />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
+        <div className={style.divForm}>
           <input
             type="password"
             name="password"
@@ -83,10 +83,10 @@ const Register = props => {
             onChange={onChange}
             required
             minLength="6"
+            placeholder="password"
           />
         </div>
-        <div>
-          <label htmlFor="password2">Repeat Password</label>
+        <div className={style.divForm}>
           <input
             type="password"
             name="password2"
@@ -94,9 +94,10 @@ const Register = props => {
             onChange={onChange}
             required
             minLength="6"
+            placeholder="Repeat Password"
           />
         </div>
-        <input type="submit" value="Register" />
+        <input className={style.submit} type="submit" value="Register" />
       </form>
     </div>
   );

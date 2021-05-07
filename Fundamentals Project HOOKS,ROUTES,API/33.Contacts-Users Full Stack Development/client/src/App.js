@@ -12,6 +12,7 @@ import AlertState from "./context/alert/AlertState";
 import Alerts from "./components/Alerts/Alerts";
 import setAuthToken from "./utils/setAuthToken";
 import PrivateRoute from "./components/Routing/PrivateRoute";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 if(localStorage.token){
   setAuthToken(localStorage.token);

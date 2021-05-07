@@ -1,6 +1,7 @@
 import React, { useState,useContext,useEffect } from "react";
 import AuthContext from "../../../context/auth/authContext";
 import AlertsContext from "../../../context/alert/alertContext";
+import style from "./Login.module.css";
 
 const Login = props => {
   const alertContext = useContext(AlertsContext);
@@ -41,27 +42,26 @@ const Login = props => {
   };
 
   return (
-    <div>
+    <div className={style.container}>
       <h1>
         Account:
         <span>Login</span>
       </h1>
-      <form onSubmit={onSubmit}>
-        <div>
-          <label htmlFor="Email">Email</label>
-          <input type="email" name="email" value={email} onChange={onChange} required />
+      <form className={style.myForm} onSubmit={onSubmit}>
+        <div className={style.divForm}>
+          <input className={style} type="email" name="email" value={email} onChange={onChange} required placeholder="email" />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
+        <div className={style.divForm}>
           <input
             type="password"
             name="password"
             value={password}
             onChange={onChange}
             required
+            placeholder="Password"
           />
         </div>
-        <input type="submit" value="Login" />
+        <input className={style.submit} type="submit" value="Login" />
       </form>
     </div>
   );

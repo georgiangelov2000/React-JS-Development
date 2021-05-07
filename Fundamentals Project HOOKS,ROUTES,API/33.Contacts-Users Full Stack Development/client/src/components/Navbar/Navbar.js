@@ -3,6 +3,7 @@ import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import ContactContext from "../../context/contacts/contactContext";
+import style from "./Navbar.module.css";
 
 const Navbar = ({ title }) => {
   const authContext = useContext(AuthContext);
@@ -29,19 +30,19 @@ const Navbar = ({ title }) => {
 
   const guestLinks = (
     <Fragment>
-      <li>
-        <Link to="/register">Register</Link>
+      <li className={style.list}>
+        <Link className={style.links} to="/register">Register</Link>
       </li>
-      <li>
-        <Link to="/login">Login</Link>
+      <li className={style.list}>
+        <Link className={style.links} to="/login">Login</Link>
       </li>
     </Fragment>
   );
 
   return (
-    <div>
+    <div className={style.navbar}>
       <h1>{title}</h1>
-      <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
+      <ul >{isAuthenticated ? authLinks : guestLinks}</ul>
     </div>
   );
 };
