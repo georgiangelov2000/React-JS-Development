@@ -22,7 +22,7 @@ const Navbar = ({ title }) => {
       <li>Hello {user && user.name}</li>
       <li>
         <a onClick={onLogout} href="#!">
-          <span>Logout</span>
+          <span className={style.spanElement}>Logout</span>
         </a>
       </li>
     </Fragment>

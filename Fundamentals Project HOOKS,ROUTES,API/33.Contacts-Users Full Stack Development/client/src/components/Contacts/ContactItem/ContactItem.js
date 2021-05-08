@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import ContactContext from "../../../context/contacts/contactContext";
+import style from "./ContactItem.module.css";
 
 const ContactItem = ({contact}) => {
   const contactContext = useContext(ContactContext);
@@ -16,11 +17,11 @@ const ContactItem = ({contact}) => {
     <div>
       <h3>{name}</h3>
       <ul>
-        {email && <li>{email}</li>}
-        {phone && <li>{phone}</li>}
+        {email && <li className={style.liElement} >{email}</li>}
+        {phone && <li className={style.liElement} >{phone}</li>}
       </ul>
-      <button onClick={()=>setCurrentContact(contact)}>Edit</button>
-      <button onClick={onDelete}>Delete</button>
+      <button className={style.buttons} onClick={()=>setCurrentContact(contact)}>Edit</button>
+      <button className={style.buttons} onClick={onDelete}>Delete</button>
     </div>
   );
 };

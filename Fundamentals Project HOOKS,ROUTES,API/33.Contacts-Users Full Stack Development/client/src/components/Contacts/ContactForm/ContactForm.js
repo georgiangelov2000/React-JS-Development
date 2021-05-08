@@ -1,5 +1,6 @@
 import React, { useState,useContext,useEffect} from "react";
 import ContactContext from "../../../context/contacts/contactContext";
+import style from "./ContactForm.module.css";
 
 const ContactForm = () => {
 const contactContext=useContext(ContactContext);
@@ -48,11 +49,11 @@ useEffect(() =>{
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form className={style.formContact} onSubmit={onSubmit}>
         <h2>{current ? 'Edit Contact':'Add Contact'}</h2>
-        <input type="text" placeholder="name" name="name" value={name} onChange={onChange} />
-        <input type="email" placeholder="email" name="email" value={email} onChange={onChange} />
-        <input type="text" placeholder="phone" name="phone" value={phone} onChange={onChange} />
+        <input className={style.formInput}  type="text" placeholder="name" name="name" value={name} onChange={onChange} />
+        <input className={style.formInput} type="email" placeholder="email" name="email" value={email} onChange={onChange} />
+        <input className={style.formInput} type="text" placeholder="phone" name="phone" value={phone} onChange={onChange} />
         <h5>Contact Type</h5>
         <input
           type="radio"
@@ -70,9 +71,9 @@ useEffect(() =>{
           onChange={onChange}
         />
         Professional{" "}
-        <input type="submit" value={current ? 'Update Contact':'Add Contact'} />
+        <input className={style.submitButton} type="submit" value={current ? 'Update Contact':'Add Contact'} />
         {current && <div>
-          <button onClick={clearAll}>Clear</button>
+          <button  onClick={clearAll}>Clear</button>
           </div>}
       </form>
     </div>

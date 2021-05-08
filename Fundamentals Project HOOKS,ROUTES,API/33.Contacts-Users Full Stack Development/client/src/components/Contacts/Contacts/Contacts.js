@@ -1,4 +1,4 @@
-import React, { useContext,useEffect } from "react";
+import React, { useContext,useEffect,Fragment} from "react";
 import ContactContext from "../../../context/contacts/contactContext";
 import ContactItem from "../ContactItem/ContactItem";
 
@@ -16,7 +16,7 @@ const Contacts = () => {
   }
 
   return (
-    <div>
+    <Fragment>
       {filtered !== null
         ? filtered.map(contact=> ( 
         <ContactItem key={contact._id} contact={contact} />
@@ -25,7 +25,7 @@ const Contacts = () => {
         <ContactItem key={contact._id} contact={contact} />
       ))}
 
-    </div>
+    </Fragment>
   );
 };
 
